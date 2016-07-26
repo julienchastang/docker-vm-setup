@@ -30,6 +30,8 @@ mkdir -p ~/git
 
 yum update
 
+yum install git
+
 cat ./docker-repo.centos >> /etc/yum.repos.d/docker.repo
 
 yum install docker-engine
