@@ -19,7 +19,7 @@ do
             shift # past argument
             ;;
         -h|--help)
-            printf $usage
+            echo -e $usage
             exit
             ;;
     esac
