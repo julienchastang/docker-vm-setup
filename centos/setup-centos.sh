@@ -45,3 +45,4 @@ usermod -aG docker $USER
 curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 echo Log out and log back in.
+echo Test with 'docker run hello-world'
