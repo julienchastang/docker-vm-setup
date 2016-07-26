@@ -3,7 +3,7 @@
 usage="$(basename "$0") [-h] [-u, --user user name] [-dc, --dc docker-compose version] -- 
 script to setup docker. Run as root:\n
     -h  show this help text\n
-    -u, --user User name on the docker VM
+    -u, --user User name on the docker VM\n
     -dc, --dc docker-compose version you wish to install\n"
 
 while [[ $# > 0 ]]
@@ -19,7 +19,7 @@ do
             shift # past argument
             ;;
         -h|--help)
-            echo $usage
+            printf $usage
             exit
             ;;
     esac
