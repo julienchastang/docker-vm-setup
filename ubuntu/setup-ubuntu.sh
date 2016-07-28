@@ -81,6 +81,6 @@ apt-get install git
 # Finalizing
 ###
 
-echo `sudo reboot` and log back in
+echo 'sudo reboot' and log back in
 
 echo Test with 'docker run hello-world'
