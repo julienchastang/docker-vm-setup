@@ -26,25 +26,40 @@ do
     shift # past argument or value
 done
 
-mkdir -p ~/git
-
-yum update
-
-yum install git
+###
+# https://docs.docker.com/engine/installation/linux/centos/
+###
 
 cat ./docker-repo.centos >> /etc/yum.repos.d/docker.repo
 
 yum install docker-engine
 
-service docker start
-
 groupadd docker
 
 usermod -aG docker $USER
+
+service docker start
+
+###
+# docker-compose
+###
 
 curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 chmod +x /usr/local/bin/docker-compose
 
+###
+# git
+###
+
+mkdir -p ~/git
+
+yum install git
+
+###
+# Finalizing
+###
+
 echo Log out and log back in.
+
 echo Test with 'docker run hello-world'
