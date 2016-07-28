@@ -54,7 +54,7 @@ chmod +x /usr/local/bin/docker-compose
 
 mkdir -p ~/git
 
-yum install git
+yum install git unzip zip
 
 ###
 # Finalizing

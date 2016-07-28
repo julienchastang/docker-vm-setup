@@ -75,7 +75,11 @@ chmod +x /usr/local/bin/docker-compose
 
 mkdir -p ~/git
 
-apt-get install git
+###
+# install a few things
+###
+
+apt-get install git unzip zip
 
 ###
 # Finalizing
