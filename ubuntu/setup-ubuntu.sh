@@ -3,7 +3,7 @@
 usage="$(basename "$0") [-h] [-u, --user user name] [-dc, --dc docker-compose version] -- 
 script to setup docker. Run as root:\n
     -h  show this help text\n
-    -u, --user User name on the docker VM\n
+    -u, --user User name on the docker VM. Will be created if user does not exist.\n
     -dc, --dc docker-compose version you wish to install\n"
 
 while [[ $# > 0 ]]
@@ -26,6 +26,22 @@ do
     shift # past argument or value
 done
 
+if [ -z ${var+x} ]; then echo "var is unset"; else echo "var is set to '$var'"; fi
+
+
+if [ -z ${USER+x} ];
+  then
+      echo "Must supply a user:" 
+      echo -e $usage
+      exit 1
+fi
+
+if [ -z ${DOCKER_COMPOSE_VERSION+x} ];
+   then
+      echo "Must supply a docker compose version:" 
+      echo -e $usage
+      exit 1
+fi
 
 ###
 # https://docs.docker.com/engine/installation/linux/ubuntulinux/
