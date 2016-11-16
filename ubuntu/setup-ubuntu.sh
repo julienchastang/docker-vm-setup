@@ -44,10 +44,16 @@ if [ -z ${DOCKER_COMPOSE_VERSION+x} ];
 fi
 
 ###
-# https://docs.docker.com/engine/installation/linux/ubuntulinux/
+# update and install a few things
 ###
 
-apt-get -qq update
+apt-get update && apt-get upgrade -y && apt-get dist-upgrade
+
+apt-get -qq install git unzip zip
+
+###
+# https://docs.docker.com/engine/installation/linux/ubuntulinux/
+###
 
 apt-get -qq install apt-transport-https ca-certificates
 
@@ -90,18 +96,6 @@ service docker start
 curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 chmod +x /usr/local/bin/docker-compose
-
-###
-# git
-###
-
-mkdir -p ~/git
-
-###
-# install a few things
-###
-
-apt-get install git unzip zip
 
 ###
 # Finalizing
