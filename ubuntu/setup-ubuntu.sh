@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 usage="$(basename "$0") [-h] [-u, --user user name] [-dc, --dc docker-compose version] -- 
 script to setup docker. Run as root:\n
     -h  show this help text\n
@@ -79,7 +84,7 @@ groupadd docker
 if id "$DOCKER_USER" >/dev/null 2>&1; then
         echo "$DOCKER_USER exists"
 else
-        useradd -m $DOCKER_USER
+        useradd -m $DOCKER_USER && chsh -s /bin/bash $DOCKER_USER
 fi
 
 usermod -aG docker $DOCKER_USER
@@ -98,6 +103,10 @@ chmod +x /usr/local/bin/docker-compose
 # Finalizing
 ###
 
-echo 'sudo reboot' and log back in with user $DOCKER_USER
+echo 'sudo reboot now' and log back in with user $DOCKER_USER
+
+echo If the docker service does not restart, consider deleting /var/lib/docker/aufs/
+
+echo Think before you delete the aufs directory
 
 echo Test with 'docker run hello-world'
