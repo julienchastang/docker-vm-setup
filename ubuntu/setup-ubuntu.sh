@@ -57,6 +57,12 @@ apt-get -qq install docker-engine
 
 groupadd docker
 
+if id "$USER" >/dev/null 2>&1; then
+        echo "$USER exists"
+else
+        useradd -m $USER
+fi
+
 usermod -aG docker $USER
 
 service docker start
@@ -85,6 +91,6 @@ apt-get install git unzip zip
 # Finalizing
 ###
 
-echo 'sudo reboot' and log back in
+echo 'sudo reboot' and log back in with user $USER
 
 echo Test with 'docker run hello-world'
