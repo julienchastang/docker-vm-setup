@@ -11,7 +11,7 @@ do
     key="$1"
     case $key in
         -u|--user)
-            USER="$2"
+            DOCKER_USER="$2"
             shift # past argument
             ;;
         -dc|--dc)
@@ -26,10 +26,7 @@ do
     shift # past argument or value
 done
 
-if [ -z ${var+x} ]; then echo "var is unset"; else echo "var is set to '$var'"; fi
-
-
-if [ -z ${USER+x} ];
+if [ -z ${DOCKER_USER+x} ];
   then
       echo "Must supply a user:" 
       echo -e $usage
@@ -79,13 +76,13 @@ apt-get -qq install docker-engine
 
 groupadd docker
 
-if id "$USER" >/dev/null 2>&1; then
-        echo "$USER exists"
+if id "$DOCKER_USER" >/dev/null 2>&1; then
+        echo "$DOCKER_USER exists"
 else
-        useradd -m $USER
+        useradd -m $DOCKER_USER
 fi
 
-usermod -aG docker $USER
+usermod -aG docker $DOCKER_USER
 
 service docker start
 
@@ -101,6 +98,6 @@ chmod +x /usr/local/bin/docker-compose
 # Finalizing
 ###
 
-echo 'sudo reboot' and log back in with user $USER
+echo 'sudo reboot' and log back in with user $DOCKER_USER
 
 echo Test with 'docker run hello-world'
