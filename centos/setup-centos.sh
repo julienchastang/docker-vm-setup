@@ -71,7 +71,9 @@ fi
 
 usermod -aG docker $DOCKER_USER
 
-service docker start
+systemctl enable docker.service
+
+systemctl start docker
 
 ###
 # docker-compose
